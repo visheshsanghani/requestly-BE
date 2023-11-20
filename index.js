@@ -7,16 +7,17 @@ const app = express();
 const port = 3000;
 app.use(cors());
 // Parse JSON in request body
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/login', (req, res) => {
+app.post('/login', (req, res) => {
     
     const { userName, password } = req.body;
     console.log('userName , password: ', userName , password);
-    if(userName == 12345 && password == 12345)
+    if(userName == "12345" && password == "12345")
     res.send({loginSuccess: true, message : "Login Successfull !"});
     else 
-    res.send({loginSuccess: false, message : "Login Unsuccessfull !"});
+    res.send({loginSuccess: false, message : "Login Unsuccessfull !"}).status(400);
 
   });
 
